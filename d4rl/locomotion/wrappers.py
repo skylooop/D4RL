@@ -1,8 +1,8 @@
 import numpy as np
 import itertools
-from gym import Env
-from gym.spaces import Box
-from gym.spaces import Discrete
+from gymnasium import Env
+from gymnasium.spaces import Box
+from gymnasium.spaces import Discrete
 
 from collections import deque
 
@@ -23,8 +23,8 @@ class ProxyEnv(Env):
     def step(self, action):
         return self._wrapped_env.step(action)
 
-    def render(self, *args, **kwargs):
-        return self._wrapped_env.render(*args, **kwargs)
+    def render(self):
+        return self._wrapped_env.render()
 
     @property
     def horizon(self):
@@ -159,10 +159,10 @@ class NormalizedBoxEnv(ProxyEnv):
         scaled_action = np.clip(scaled_action, lb, ub)
 
         wrapped_step = self._wrapped_env.step(scaled_action)
-        next_obs, reward, done, info = wrapped_step
+        next_obs, reward, done, _, info = wrapped_step
         if self._should_normalize:
             next_obs = self._apply_normalize_obs(next_obs)
-        return next_obs, reward * self._reward_scale, done, info
+        return next_obs, reward * self._reward_scale, done, False, info
 
     def __str__(self):
         return "Normalized: %s" % self._wrapped_env

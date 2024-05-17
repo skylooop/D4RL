@@ -20,7 +20,7 @@ import tempfile
 import xml.etree.ElementTree as ET
 import math
 import numpy as np
-import gym
+import gymnasium as gym
 from copy import deepcopy
 
 RESET = R = 'r'  # Reset position.
@@ -299,9 +299,9 @@ class MazeEnv(gym.Env):
       if self._is_in_collision(new_pos):
         self.set_xy(old_pos)
     else:
-      inner_next_obs, inner_reward, done, info = self.LOCOMOTION_ENV.step(self, action)
+      inner_next_obs, inner_reward, done, _, info = self.LOCOMOTION_ENV.step(self, action)
     next_obs = self._get_obs()
-    return next_obs, inner_reward, done, info
+    return next_obs, inner_reward, done, None, info
 
   def _get_best_next_rowcol(self, current_rowcol, target_rowcol):
     """Runs BFS to find shortest path to target and returns best next rowcol. 
