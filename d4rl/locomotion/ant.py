@@ -49,9 +49,12 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     self._body_com_indices = {}
     self._body_comvel_indices = {}
     self.render_mode = kwargs.pop("render_mode")
+    self.camera_config = kwargs.pop("default_camera_config")
     self._non_zero_reset = non_zero_reset
     observation_space = gymnasium.spaces.Box(low=-np.inf, high=np.inf, shape=(29, ), dtype=np.float32)
-    mujoco_env.MujocoEnv.__init__(self, file_path, 5, observation_space=observation_space, render_mode=self.render_mode)
+    mujoco_env.MujocoEnv.__init__(self, file_path, 5,
+                                  observation_space=observation_space, render_mode=self.render_mode,
+                                  default_camera_config=self.camera_config)
     utils.EzPickle.__init__(self)
 
   @property
@@ -131,9 +134,12 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     self.set_state(qpos, qvel)
     return self._get_obs()
 
-  def viewer_setup(self):
-    self.viewer.cam.distance = self.model.stat.extent * 0.5
-
+  # def viewer_setup(self):
+  #   self.viewer.cam.distance = self.model.stat.extent * 0.5
+  #   self.viewer.cam.elevation = -90
+  #   self.viewer.cam.lookat[0] = 18
+  #   self.viewer.cam.lookat[1] = 12
+    
   def get_xy(self):
     return self.data.qpos[:2]
 
