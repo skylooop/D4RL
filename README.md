@@ -1,6 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/jjshoots/D4RL/master/d4rl-text.png" width="500px"/>
 </p>
+This fork updates common D4RL library to be used with newest Gymnasium lib.
 
 D4RL is an open-source benchmark for offline reinforcement learning. It provides standardized environments and datasets for training and benchmarking algorithms. A supplementary [whitepaper](https://arxiv.org/abs/2004.07219) and [website](https://sites.google.com/view/d4rl/home) are also available.
 
@@ -14,14 +15,9 @@ The current maintenance plan for this library is:
 
 D4RL can be installed by cloning the repository as follows:
 ```
-git clone https://github.com/Farama-Foundation/d4rl.git
+git clone https://github.com/skylooop/D4RL.git
 cd d4rl
 pip install -e .
-```
-
-Or, alternatively:
-```
-pip install git+https://github.com/Farama-Foundation/d4rl@master#egg=d4rl
 ```
 
 The control environments require MuJoCo as a dependency. You may need to obtain a [license](https://www.roboti.us/license.html) and follow the setup instructions for mujoco_py. This mostly involves copying the key to your MuJoCo installation folder.
@@ -79,22 +75,6 @@ We have aggregated implementations of various offline RL algorithms in a [separa
 ## Off-Policy Evaluations
 
 D4RL currently has limited support for off-policy evaluation methods, on a select few locomotion tasks. We provide trained reference policies and a set of performance metrics. Additional details can be found in the [wiki](https://github.com/Farama-Foundation/d4rl/wiki/Off-Policy-Evaluation).
-
-## Recent Updates
-
-### 2-12-2020
-- Added new Gym-MuJoCo datasets (labeled v2) which fixed Hopper's performance and the qpos/qvel fields.
-- Added additional wiki documentation on [generating datasets](https://github.com/Farama-Foundation/d4rl/wiki/Dataset-Reproducibility-Guide).
-
-
-## Acknowledgements
-
-D4RL builds on top of several excellent domains and environments built by various researchers. We would like to thank the authors of:
-- [hand_dapg](https://github.com/aravindr93/hand_dapg)
-- [gym-minigrid](https://github.com/maximecb/gym-minigrid)
-- [carla](https://github.com/carla-simulator/carla)
-- [flow](https://github.com/flow-project/flow)
-- [adept_envs](https://github.com/google-research/relay-policy-learning)
 
 ## Citation
 
